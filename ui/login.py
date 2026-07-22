@@ -1,15 +1,30 @@
 import streamlit as st
 
+from ui.layout import hero_section
+
 
 def show_login():
 
-    st.title("Enterprise Authentication")
-
-    st.write(
-        "Please sign in using your enterprise email address."
+    hero_section(
+        title="Enterprise authentication built for modern audit workflows.",
+        subtitle="Sign in with your work email to access audit discovery, governance reasoning, and executive reports.",
+        description=(
+            "This secure sign-in step verifies your identity and prepares your workspace for a live audit experience. "
+            "Enter your enterprise email to continue."
+        ),
     )
 
-    st.divider()
+    st.markdown(
+        """
+        <div class="glass-panel">
+            <div class="glass-panel-title">Continue with your enterprise email</div>
+            <div class="glass-panel-body">
+                Use a verified corporate email address and we will take you straight into the audit setup flow.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
     email = st.text_input(
         "Enterprise Email Address",
@@ -18,25 +33,18 @@ def show_login():
 
     st.write("")
 
-    col1, col2, col3 = st.columns([2, 2, 2])
+    if st.button("Continue", use_container_width=True):
 
-    with col2:
+        if email.strip() == "":
 
-        if st.button(
-            "Continue",
-            use_container_width=True
-        ):
+            st.warning(
+                "Please enter your enterprise email address."
+            )
 
-            if email.strip() == "":
+            return None
 
-                st.warning(
-                    "Please enter your enterprise email address."
-                )
+        st.session_state.user = email.strip()
 
-                return None
-
-            st.session_state.user = email.strip()
-
-            return "new_audit"
+        return "new_audit"
 
     return None

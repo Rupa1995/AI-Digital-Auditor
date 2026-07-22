@@ -1,6 +1,7 @@
 {
   "image": "mcr.microsoft.com/devcontainers/python:3.14-bookworm",
   "features": {
-    "ghcr.io/devcontainers-extra/features/uv:1": {}
+    "ghcr.io/devcontainers-extra/features/uv:1": {},
+    "ghcr.io/aqua/devcontainer-gcloud/gcloud:1": {}
   }
 }

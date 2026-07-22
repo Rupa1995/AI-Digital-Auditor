@@ -1,6 +1,7 @@
 import streamlit as st
 
 from services.audit_chat_service import AuditChatService
+from ui.layout import hero_section
 
 
 def show_ask_ai_auditor():
@@ -18,13 +19,12 @@ def show_ask_ai_auditor():
 
         return None
 
-    st.title("AI Digital Auditor")
-
-    st.subheader("💬 Ask AI Auditor")
-
-    st.caption(
-        "Ask questions grounded in the completed live audit, "
-        "its evidence, findings and governance references."
+    hero_section(
+        title="Ask the AI auditor about your completed audit.",
+        subtitle="Grounded answers based on evidence, findings, and governance interpretation.",
+        description=(
+            "Ask questions about controls, evidence, risk, and remediation so you can quickly make audit decisions."
+        ),
     )
 
     st.divider()

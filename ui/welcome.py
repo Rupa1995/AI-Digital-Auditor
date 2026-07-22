@@ -1,78 +1,54 @@
 import streamlit as st
 
+from ui.layout import hero_section
+
 
 def show_welcome():
 
-    st.title("AI Digital Auditor")
-
-    st.subheader("AI-assisted Technology Auditor")
-
-    st.divider()
+    hero_section(
+        title="A smarter way to audit cloud technology.",
+        subtitle="AI-driven evidence collection, enterprise governance reasoning, and polished audit reports in one modern workflow.",
+        description=(
+            "AI Digital Auditor brings AI reasoning and live evidence into a single audit experience. "
+            "It helps auditors discover controls, assess risk, and generate professional findings with speed, "
+            "clarity, and governance confidence."
+        ),
+    )
 
     st.markdown(
         """
-### What is AI Digital Auditor?
-
-AI Digital Auditor is an AI-assisted Technology Auditor that performs
-evidence-based technology audits using enterprise governance and
-AI reasoning to generate professional audit findings and reports.
-
-Unlike traditional audit approaches, the platform combines
-technical evidence, enterprise controls and AI analysis to assist
-technology auditors in delivering consistent, high-quality audits.
-"""
+        <div class="glass-panel">
+            <div class="glass-panel-title">Why this matters</div>
+            <div class="glass-panel-body">
+                Audits should be fast, repeatable, and grounded in evidence. This platform combines cloud discovery,
+                enterprise governance, and AI-assisted reasoning so teams can audit complex environments with confidence.
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
-
-    st.divider()
 
     st.markdown(
         """
-### Why do organisations need it?
-
-Technology environments change continuously while audits are often
-performed periodically using manual evidence collection and expert
-judgement. As technology estates continue to grow, maintaining
-consistent audit quality becomes increasingly difficult.
-
-AI Digital Auditor assists auditors by automating evidence collection,
-assessing technology environments against enterprise governance and
-producing AI-assisted audit findings that improve audit consistency,
-quality and efficiency.
-"""
+        <div class="feature-grid">
+            <div class="feature-card">
+                <h3>Live cloud discovery</h3>
+                <p>Automatically identify audit-relevant services, resources, and security posture in a GCP project.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Governance-first controls</h3>
+                <p>Apply enterprise control logic and technology policy thinking across every audit workflow.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Professional reports</h3>
+                <p>Generate polished findings, risk summaries, and executive-ready audit commentary automatically.</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
-    st.divider()
-
-    st.markdown(
-        """
-### Benefits
-
-- Continuous audit readiness
-
-- Reduced manual audit effort
-
-- Faster evidence collection
-
-- Evidence-based audit assessments
-
-- Consistent application of enterprise governance
-
-- AI-assisted audit findings and recommendations
-
-- Professional audit reports
-"""
-    )
-
-    st.divider()
-
-    col1, col2, col3 = st.columns([2, 3, 2])
-
-    with col2:
-
-        if st.button(
-            "Explore AI Digital Auditor",
-            use_container_width=True
-        ):
-            return "login"
+    if st.button("Explore AI Digital Auditor", use_container_width=True):
+        return "login"
 
     return None

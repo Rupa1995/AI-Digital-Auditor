@@ -1,5 +1,7 @@
 import streamlit as st
 
+from ui.layout import hero_section
+
 
 def _calculate_dashboard(workpaper):
 
@@ -283,69 +285,76 @@ def show_dashboard():
         workpaper
     )
 
-    st.title("AI Digital Auditor")
-    st.caption(
-        "Executive Multi-technology Dashboard"
+    hero_section(
+        title="Executive audit insights in one place.",
+        subtitle="Review compliance, control interpretation, and coverage across the completed audit.",
+        description=(
+            "This dashboard surfaces the most important executive metrics, governance interpretation, "
+            "and operational evidence coverage from your completed audit."
+        ),
     )
     st.divider()
 
-    st.subheader("Audit Scope")
-
-    col1, col2, col3 = st.columns(3)
-
-    col1.write("**Project**")
-    col1.write(
-        scope.get(
-            "projectId",
-            scope.get("project", ""),
-        )
+    st.markdown(
+        """
+        <div class="section-shell">
+            <div class="section-header">
+                <h2>Audit scope</h2>
+                <span class="step-pill">Executive Overview</span>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <strong>Project</strong>
+                    <p>{project}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Technologies Audited</strong>
+                    <p>{technologies}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Resources Audited</strong>
+                    <p>{resource_count}</p>
+                </div>
+            </div>
+        </div>
+        """.format(
+            project=scope.get(
+                "projectId",
+                scope.get("project", ""),
+            ),
+            technologies=", ".join(
+                scope.get(
+                    "technologies",
+                    []
+                )
+            ),
+            resource_count=scope.get(
+                "resourceCount",
+                len(resources),
+            ),
+        ),
+        unsafe_allow_html=True,
     )
 
-    col2.write("**Technologies Audited**")
-    col2.write(
-        ", ".join(
-            scope.get(
-                "technologies",
-                []
-            )
-        )
-    )
-
-    col3.write("**Resources Audited**")
-    col3.write(
-        scope.get(
-            "resourceCount",
-            len(resources),
-        )
-    )
-
-    st.divider()
-
-    col1, col2, col3, col4, col5, col6 = st.columns(6)
-
-    col1.metric(
-        "Audit Opinion",
-        summary.get("overallOpinion", "UNKNOWN"),
-    )
-    col2.metric(
-        "Compliance",
-        f"{dashboard['compliance']}%",
-    )
-    col3.metric(
-        "Technologies",
-        summary.get("technologiesAudited", 0),
-    )
-    col4.metric(
-        "Resources",
-        summary.get("resourcesAudited", 0),
-    )
-    col5.metric(
-        "Failed",
-        summary.get("failed", 0),
-    )
-    col6.metric(
-        "Not Verified",
-        summary.get("notVerified", 0),
+    st.markdown(
+        """
+        <div class="metric-grid">
+            <div class="metric-card"><strong>Audit Opinion</strong><span>{opinion}</span></div>
+            <div class="metric-card"><strong>Compliance</strong><span>{compliance}%</span></div>
+            <div class="metric-card"><strong>Technologies</strong><span>{technologies_audited}</span></div>
+            <div class="metric-card"><strong>Resources</strong><span>{resources_audited}</span></div>
+            <div class="metric-card"><strong>Failed</strong><span>{failed}</span></div>
+            <div class="metric-card"><strong>Not Verified</strong><span>{not_verified}</span></div>
+        </div>
+        """.format(
+            opinion=summary.get("overallOpinion", "UNKNOWN"),
+            compliance=dashboard["compliance"],
+            technologies_audited=summary.get("technologiesAudited", 0),
+            resources_audited=summary.get("resourcesAudited", 0),
+            failed=summary.get("failed", 0),
+            not_verified=summary.get("notVerified", 0),
+        ),
+        unsafe_allow_html=True,
     )
 
     st.divider()
@@ -353,11 +362,18 @@ def show_dashboard():
     st.subheader("Executive Summary")
 
     if commentary.get("success"):
-        st.write(
-            commentary.get(
-                "executiveSummary",
-                "",
-            )
+        st.markdown(
+            """
+            <div class="report-panel">
+                <p>{summary}</p>
+            </div>
+            """.format(
+                summary=commentary.get(
+                    "executiveSummary",
+                    "",
+                ),
+            ),
+            unsafe_allow_html=True,
         )
     else:
         st.info(

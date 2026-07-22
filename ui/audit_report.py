@@ -3,6 +3,7 @@ import json
 import streamlit as st
 
 from services.gemini_service import GeminiService
+from ui.layout import hero_section
 
 
 def _status_icon(status):
@@ -209,28 +210,69 @@ def show_audit_report():
     )
 
     st.caption("CONFIDENTIAL")
-    st.title("AI Digital Auditor")
-    st.subheader(
-        "Enterprise Technology Assurance Report"
+    hero_section(
+        title="Enterprise Technology Assurance Report",
+        subtitle="A polished executive summary of your completed live audit.",
+        description=(
+            "This report packages the audit engagement, scope, findings, and governance rationale "
+            "into a structured output for leadership and control owners."
+        ),
     )
     st.caption(
         "Evidence-driven Enterprise Technology Assurance"
     )
     st.divider()
 
-    st.header("Audit Engagement")
+    st.markdown(
+        """
+        <div class="section-shell">
+            <div class="section-header">
+                <h2>Audit engagement</h2>
+                <span class="step-pill">Report</span>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <strong>Audit ID</strong>
+                    <p>{audit_id}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Audit Date</strong>
+                    <p>{audit_date}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Audit Type</strong>
+                    <p>{audit_type}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Cloud Platform</strong>
+                    <p>{cloud_platform}</p>
+                </div>
+            </div>
+        </div>
+        """.format(
+            audit_id=engagement.get(
+                "auditId",
+                "",
+            ),
+            audit_date=engagement.get(
+                "auditDate",
+                "",
+            ),
+            audit_type=engagement.get(
+                "auditType",
+                "",
+            ),
+            cloud_platform=scope.get(
+                "cloudPlatform",
+                "Google Cloud Platform",
+            ),
+        ),
+        unsafe_allow_html=True,
+    )
 
     col1, col2 = st.columns(2)
 
     with col1:
-        st.write("**Audit ID**")
-        st.write(
-            engagement.get(
-                "auditId",
-                "",
-            )
-        )
-
         st.write("**Audit Date**")
         st.write(
             engagement.get(

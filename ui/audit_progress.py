@@ -12,6 +12,7 @@ from services.technology_control_engine import (
     TechnologyControlEngine,
 )
 from services.workpaper_service import WorkpaperService
+from ui.layout import hero_section
 
 
 def _choose_cloudsql_adr(governance):
@@ -309,44 +310,42 @@ def show_audit_progress():
         {}
     )
 
-    st.title("Enterprise Technology Audit Execution")
-    st.caption(
-        "Live AI-scoped multi-technology audit"
+    hero_section(
+        title="Execute the AI-scoped live audit.",
+        subtitle="Run live evidence collection, AI governance analysis, and audit aggregation in one flow.",
+        description=(
+            "This audit execution page validates your cloud project, builds the AI audit plan, "
+            "and generates the consolidated workpaper that powers the executive dashboard."
+        ),
     )
     st.divider()
 
-    st.subheader("Audit Target")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.write("**Requestor**")
-        st.write(request.get("requestor", ""))
-
-        st.write("**Cloud Platform**")
-        st.write(request.get("platform", ""))
-
-        st.write("**Project**")
-        st.write(project_id)
-
-    with col2:
-        st.write("**Audit Scope**")
-        st.write(request.get("scope", ""))
-
-        st.write("**Technologies Discovered**")
-        st.write(
-            len(discovery.get("services", []))
-        )
-
-        st.write("**MVP Audit Technologies**")
-        st.write(
-            ", ".join(
-                request.get(
-                    "auditableServices",
-                    []
-                )
-            )
-        )
+    st.markdown(
+        """
+        <div class="section-shell">
+            <div class="section-header">
+                <h2>Audit target</h2>
+                <span class="step-pill">Live execution</span>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-card"><strong>Requestor</strong><p>{requestor}</p></div>
+                <div class="detail-card"><strong>Cloud Platform</strong><p>{platform}</p></div>
+                <div class="detail-card"><strong>Project</strong><p>{project}</p></div>
+                <div class="detail-card"><strong>Audit Scope</strong><p>{scope}</p></div>
+                <div class="detail-card"><strong>Technologies Discovered</strong><p>{technologies}</p></div>
+                <div class="detail-card"><strong>MVP Audit Technologies</strong><p>{auditable}</p></div>
+            </div>
+        </div>
+        """.format(
+            requestor=request.get("requestor", ""),
+            platform=request.get("platform", ""),
+            project=project_id,
+            scope=request.get("scope", ""),
+            technologies=len(discovery.get("services", [])),
+            auditable=", ".join(request.get("auditableServices", [])),
+        ),
+        unsafe_allow_html=True,
+    )
 
     st.divider()
 

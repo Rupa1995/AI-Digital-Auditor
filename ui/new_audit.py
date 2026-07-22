@@ -4,6 +4,7 @@ from services.evidence_service import EvidenceService
 from services.governance_knowledge_service import (
     GovernanceKnowledgeService,
 )
+from ui.layout import hero_section
 
 
 AUDITABLE_SERVICES = {
@@ -44,13 +45,29 @@ def show_new_audit():
 
     evidence_service = EvidenceService()
 
-    st.title("New Audit Engagement")
-    st.caption(
-        f"Signed in as: {st.session_state.user}"
+    hero_section(
+        title="Set up your audit with confidence.",
+        subtitle="Select a cloud target, scope the engagement, and discover the environment before the live audit begins.",
+        description=(
+            "The AI Audit Planner will validate your project, discover services, and prepare the right governance controls for review. "
+            "Start with a single GCP project to unlock live evidence scanning."
+        ),
     )
-    st.divider()
 
-    st.subheader("Step 1 - Select Cloud Platform")
+    st.markdown(
+        """
+        <div class="section-shell">
+            <div class="section-header">
+                <h2>Audit setup</h2>
+                <span class="step-pill">Step 1 of 6</span>
+            </div>
+            <p class="hero-description">Choose your audit platform and scope, then connect to the target project.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.subheader("Step 1 — Select Cloud Platform")
 
     platform = st.selectbox(
         "Cloud Platform",
@@ -72,7 +89,7 @@ def show_new_audit():
 
     st.divider()
 
-    st.subheader("Step 2 - Select Audit Scope")
+    st.subheader("Step 2 — Select Audit Scope")
 
     scope = st.radio(
         "Audit Scope",
@@ -112,7 +129,7 @@ def show_new_audit():
 
     st.divider()
 
-    st.subheader("Step 4 - Discover Google Cloud Environment")
+    st.subheader("Step 4 — Discover Google Cloud Environment")
 
     if st.button(
         "Connect and Discover Environment",
@@ -167,29 +184,42 @@ def show_new_audit():
         "Successfully connected to Google Cloud."
     )
 
-    st.divider()
+    st.markdown(
+        """
+        <div class="section-shell">
+            <div class="section-header">
+                <h2>Connected Google Cloud Environment</h2>
+                <span class="step-pill">Connected</span>
+            </div>
+            <div class="detail-grid">
+                <div class="detail-card">
+                    <strong>Project ID</strong>
+                    <p>{project_id}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Project Name</strong>
+                    <p>{project_name}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Project Number</strong>
+                    <p>{project_number}</p>
+                </div>
+                <div class="detail-card">
+                    <strong>Lifecycle State</strong>
+                    <p>{project_state}</p>
+                </div>
+            </div>
+        </div>
+        """.format(
+            project_id=project.get("projectId", ""),
+            project_name=project.get("projectName", ""),
+            project_number=project.get("projectNumber", ""),
+            project_state=project.get("state", ""),
+        ),
+        unsafe_allow_html=True,
+    )
 
-    st.subheader("Connected Google Cloud Environment")
-
-    col1, col2 = st.columns(2)
-
-    with col1:
-        st.write("**Project ID**")
-        st.write(project.get("projectId", ""))
-
-        st.write("**Project Name**")
-        st.write(project.get("projectName", ""))
-
-    with col2:
-        st.write("**Project Number**")
-        st.write(project.get("projectNumber", ""))
-
-        st.write("**Lifecycle State**")
-        st.write(project.get("state", ""))
-
-    st.divider()
-
-    st.subheader("Step 5 - AI Environment Discovery")
+    st.subheader("Step 5 — AI Environment Discovery")
 
     rows = []
 
@@ -228,10 +258,14 @@ def show_new_audit():
         )
     ]
 
-    st.info(
-        "The AI Audit Planner will analyse all discovered "
-        "technologies. Deterministic live validation is currently "
-        "implemented for Cloud SQL, IAM and Cloud Storage."
+    st.markdown(
+        """
+        <div class="status-card">
+            <h4>Audit readiness</h4>
+            <p>The AI Audit Planner will analyse all discovered technologies. Deterministic live validation is currently implemented for Cloud SQL, IAM and Cloud Storage.</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
     )
 
     if discovery.get("errors"):
@@ -244,7 +278,7 @@ def show_new_audit():
     st.divider()
 
     st.subheader(
-        "Step 6 - Review Enterprise Controls Available for Assessment"
+        "Step 6 — Review Enterprise Controls Available for Assessment"
     )
 
     controls = _load_control_preview()
