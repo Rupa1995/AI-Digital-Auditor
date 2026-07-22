@@ -1,0 +1,91 @@
+/* ==========================================================
+   AI Digital Auditor
+   Simple Enterprise Theme
+========================================================== */
+
+.stApp {
+    background-color: #F8FBFF;
+}
+
+/* Hide Streamlit Menu */
+
+#MainMenu {
+    visibility: hidden;
+}
+
+footer {
+    visibility: hidden;
+}
+
+header {
+    visibility: hidden;
+}
+
+/* Titles */
+
+h1 {
+    color: #0F4C81;
+    font-size: 40px !important;
+    font-weight: 700;
+}
+
+h2 {
+    color: #1565C0;
+}
+
+h3 {
+    color: #1565C0;
+}
+
+/* Buttons */
+
+.stButton>button {
+
+    background-color: #1565C0;
+
+    color: white;
+
+    border-radius: 8px;
+
+    border: none;
+
+    height: 48px;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    width: 100%;
+}
+
+.stButton>button:hover {
+
+    background-color: #0D47A1;
+
+    color: white;
+}
+
+/* Text Input */
+
+.stTextInput input {
+
+    border-radius: 8px;
+
+    border: 1px solid #C5D9F1;
+}
+
+/* Radio */
+
+.stRadio {
+
+    padding-top: 10px;
+}
+
+/* Divider */
+
+hr {
+
+    margin-top: 25px;
+
+    margin-bottom: 25px;
+}

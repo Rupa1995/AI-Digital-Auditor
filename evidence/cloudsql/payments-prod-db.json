@@ -1,0 +1,70 @@
+{
+  "resource": {
+    "projectId": "playground-s-11-31442f33",
+    "service": "Cloud SQL",
+    "instanceName": "payments-prod-db",
+    "environment": "Production",
+    "location": "asia-south1"
+  },
+
+  "technicalEvidence": {
+
+    "databaseEngine": "PostgreSQL",
+
+    "databaseVersion": "15",
+
+    "encryption": "GMEK",
+
+    "kmsKeyName": null,
+
+    "minimumPasswordLength": 6,
+
+    "highAvailability": true,
+
+    "availabilityType": "REGIONAL",
+
+    "backup": true,
+
+    "backupEnabled": true,
+
+    "pitr": true,
+
+    "pointInTimeRecoveryEnabled": true,
+
+    "privateIp": true,
+
+    "publicIpv4Enabled": false,
+
+    "deletionProtection": true,
+
+    "storageAutoIncrease": true
+  },
+
+  "operationalEvidence": {
+
+    "logging": true,
+
+    "monitoring": true,
+
+    "alerts": true,
+
+    "backupRetentionDays": 30
+
+  },
+
+  "metadata": {
+
+    "schemaVersion": "2.0",
+
+    "collectedBy": "Evidence Acquisition Layer",
+
+    "collectionMode": "LOCAL_JSON",
+
+    "confidence": "High",
+
+    "completeness": "Complete",
+
+    "snapshotTime": "2026-07-22T10:00:00Z"
+
+  }
+}

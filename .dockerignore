@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual Environment
+.venv/
+venv/
+
+# Environment variables
+.env
+
+# Git
+.git/
+.gitignore
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Test files
+test_*.py
+gemini.py
+
+# Old project copy
+Working UI with dummy data/
+
+# Documentation
+*.md
+
+# Reports (if generated)
+reports/
+
+# Python cache
+.pytest_cache/
+
+# Misc
+*.log
