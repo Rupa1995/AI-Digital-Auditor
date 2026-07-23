@@ -6,7 +6,7 @@ from ui.layout import hero_section
 def show_welcome():
 
     hero_section(
-        title="A smarter way to audit cloud technology.",
+        title="Audit Smarter. Deliver Faster.",
         subtitle="AI-driven evidence collection, enterprise governance reasoning, and polished audit reports in one modern workflow.",
         description=(
             "AI Digital Auditor brings AI reasoning and live evidence into a single audit experience. "
